@@ -11,6 +11,7 @@ import numpy as np
 import argparse
 sys.path.append(os.path.abspath(__file__+'/../../../../../'))
 import SimulationFramework.Modules.read_beam_file as rbf
+sys.path.append(os.path.abspath(__file__+'/../../../../../../'))
 import Software.Procedures.qt as qt
 import pyqtgraph as pg
 from pyqtgraph.widgets.MatplotlibWidget import MatplotlibWidget

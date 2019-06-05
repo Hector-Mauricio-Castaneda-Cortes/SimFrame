@@ -78,11 +78,11 @@ class fitnessFunc():
         self.post_injector = True
         if self.post_injector:
             linac2field, linac2phase, linac3field, linac3phase, fhcfield, fhcphase, linac4field, linac4phase, bcangle = args
-            self.parameters = dict(zip(['linac2field', 'linac2phase', 'linac3field', 'linac3phase', 'fhcfield', 'fhcphase', 'linac4field', 'linac4phase', 'bcangle'], args))
+            self.parameters = dict(list(zip(['linac2field', 'linac2phase', 'linac3field', 'linac3phase', 'fhcfield', 'fhcphase', 'linac4field', 'linac4phase', 'bcangle'], args)))
         else:
             ''' including injector parameters '''
             gunphase, gunsol, linac1field, linac1phase, linac1sol1, linac1sol2, linac2field, linac2phase, linac3field, linac3phase, fhcfield, fhcphase, linac4field, linac4phase, bcangle = args
-            self.parameters = dict(zip(['gunphase','gunsol','linac1field','linac1phase', 'linac1sol1', 'linac1sol2', 'linac2field', 'linac2phase', 'linac3field', 'linac3phase', 'fhcfield', 'fhcphase', 'linac4field', 'linac4phase', 'bcangle'], args))
+            self.parameters = dict(list(zip(['gunphase','gunsol','linac1field','linac1phase', 'linac1sol1', 'linac1sol2', 'linac2field', 'linac2phase', 'linac3field', 'linac3phase', 'fhcfield', 'fhcphase', 'linac4field', 'linac4phase', 'bcangle'], args)))
         self.npart=2**(3*scaling)
         ncpu = scaling*3
         if self.post_injector:
@@ -167,7 +167,7 @@ class fitnessFunc():
             # constraintsList = merge_two_dicts(constraintsList, constraintsList5)
             fitness = self.cons.constraints(constraintsList)
             if self.verbose:
-                print self.cons.constraintsList(constraintsList)
+                print(self.cons.constraintsList(constraintsList))
             if self.summary:
                 np.save('summary_constraints.txt', self.cons.constraintsList(constraintsList))
                 # self.astra.createHDF5Summary(reference='Longitudinal_GA')
@@ -217,7 +217,7 @@ with open('FEBE_best_solutions_running.csv', 'r') as csvfile:
     results.append(row)
 best = results[0]
 
-print 'starting values = ', best
+print('starting values = ', best)
 # fit = fitnessFunc(best, os.getcwd()+'/test', scaling=6, overwrite=True, verbose=True, summary=False)
 # fitvalue = fit.calculateBeamParameters()
 # exit()
@@ -284,11 +284,11 @@ if __name__ == "__main__":
 
     pool.close()
     # print 'pop = ', pop
-    print logbook
-    print hof
+    print(logbook)
+    print(hof)
 
     try:
-        print 'best fitness = ', optfunc(hof[0], dir=os.getcwd()+'/FEBE_best_longitudinal', scaling=6, overwrite=True, verbose=True, summary=True)
+        print('best fitness = ', optfunc(hof[0], dir=os.getcwd()+'/FEBE_best_longitudinal', scaling=6, overwrite=True, verbose=True, summary=True))
         with open('FEBE_best_longitudinal/FEBE_longitudinal_best_solutions.csv','wb') as out:
             csv_out=csv.writer(out)
             for row in hof:

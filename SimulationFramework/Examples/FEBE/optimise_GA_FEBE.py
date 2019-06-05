@@ -72,7 +72,7 @@ framework.loadSettings('Lattices/clara400_v12_FEBE.def')
 # parameters = [a['k1'] for a in framework.getElementType('quadrupole') if a['position_start'][2] > posstart]
 variables = [a for a in framework.getElementType('quadrupole') if 'S07F' in a.objectName]
 preparameters = parameters = [a['k1'] for a in variables]
-print 'parameters = ', parameters
+print('parameters = ', parameters)
 # exit()
 best = parameters
 
@@ -133,7 +133,7 @@ class fitnessFunc():
             constraintsList = merge_two_dicts(constraintsList, constraintsListS07)
             fitness = self.cons.constraints(constraintsList)
             if self.verbose:
-                print self.cons.constraintsList(constraintsList)
+                print(self.cons.constraintsList(constraintsList))
             if self.summary:
                 self.framework.createHDF5Summary(reference='Transverse_GA')
             return fitness
@@ -150,8 +150,8 @@ def optfunc(args, dir=None, **kwargs):
             fitvalue = fit.calculateBeamParameters()
     return (fitvalue,)
 
-print 'starting values = ', best
-print optfunc(best, dir=os.getcwd()+'/transverse_FEBE_best_Short_240', scaling=6, overwrite=True, verbose=True, summary=False)
+print('starting values = ', best)
+print(optfunc(best, dir=os.getcwd()+'/transverse_FEBE_best_Short_240', scaling=6, overwrite=True, verbose=True, summary=False))
 # fit = fitnessFunc(best, os.getcwd()+'/test', scaling=4, overwrite=True, verbose=True, summary=False)
 # fitvalue = fit.calculateBeamParameters()
 exit()
@@ -216,11 +216,11 @@ if __name__ == "__main__":
                             stats=stats, halloffame=hof)
 
     # print 'pop = ', pop
-    print logbook
-    print hof
+    print(logbook)
+    print(hof)
 
     try:
-        print 'best fitness = ', optfunc(hof[0], dir=os.getcwd()+'/transverse_DCP_best_Short_240', scaling=6, overwrite=True, verbose=True, summary=False, clean=True)
+        print('best fitness = ', optfunc(hof[0], dir=os.getcwd()+'/transverse_DCP_best_Short_240', scaling=6, overwrite=True, verbose=True, summary=False, clean=True))
         with open('transverse_DCP_best_Short_240/transverse_DCP_best_solutions.csv','wb') as out:
             csv_out=csv.writer(out)
             for row in hof:
